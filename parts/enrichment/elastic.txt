@@ -1,0 +1,18 @@
+get heroes/_search?size=100&sort=tophero:desc
+get heroes/_search?size=100
+
+get herotracker/_search
+
+POST herotracker/_search?size=0
+{
+    "aggs" : {
+        "popularelements" : {
+            "terms" : {
+                "field" : "element.keyword", "size": 20
+            },
+            "aggs" : {
+                "clickcount" : { "terms": { "field" : "id" , "size" : 20} } 
+            }
+        }
+    }
+}
