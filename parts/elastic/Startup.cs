@@ -1,7 +1,6 @@
 using System;
 using System.Net.Http.Headers;
 using System.Text;
-using coreheroes.Enrichment;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,15 +33,12 @@ namespace coreheroes
             
             services.AddHttpClient();
 
-            var byteArray = Encoding.ASCII.GetBytes($"elasticT:UqeXS8o3ZBi1eHNUoxmvsD6c6");//TODO: this goes to config
+            var byteArray = Encoding.ASCII.GetBytes($"elastic:qeXS8o3ZBi1eHNUoxmvsD6c6");//TODO: this goes to config
             services.AddHttpClient(HttpclientNames.ElasticHttpClient, client =>
             {
                 client.BaseAddress = new Uri("https://0d5d3591bdfa4050b21e4ca8934e7885.us-east-1.aws.found.io:9243");
                 client.DefaultRequestHeaders.Authorization  = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
             });
-
-
-            services.AddHostedService<TimedHostedEnrichementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
