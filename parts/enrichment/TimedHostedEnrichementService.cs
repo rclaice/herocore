@@ -39,9 +39,7 @@ namespace coreheroes.Enrichment
         {
             _logger.LogInformation("Timed Background Service is working.");
 
-            var client = httpClientFactory.CreateClient();
-            var byteArray = Encoding.ASCII.GetBytes($"elastic:qeXS8o3ZBi1eHNUoxmvsD6c6");
-            client.DefaultRequestHeaders.Authorization  = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            var client = httpClientFactory.CreateClient(HttpclientNames.ElasticHttpClient);
 
             var query = GetHeroScoresQuery();
             var heroScoresQueryContent  = new StringContent(query, Encoding.UTF8, "application/json");
